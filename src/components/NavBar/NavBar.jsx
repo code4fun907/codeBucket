@@ -14,8 +14,11 @@ const NavBar = () => {
   };
 
   return (
-    <header className="relative flex flex-wrap items-center justify-center px-4 bg-blue-400 shadow-lg">
-      <nav className="flex items-center w-full py-4 max-w-7xl">
+    <header
+      className="relative flex flex-wrap items-center justify-center bg-blue-400 shadow-lg"
+      id="navheader"
+    >
+      <nav className="flex items-center w-full px-4 py-4 max-w-7xl">
         <Link to="/" className="mr-auto">
           <LogoIcon />
         </Link>
@@ -38,7 +41,7 @@ const NavBar = () => {
         />
       </nav>
       {mobileNavOpen && (
-        <div className="w-full bg-blue-400 md:hidden">
+        <div className="w-full px-4 bg-blue-400 md:hidden">
           <ul className="text-white">
             <div className="mb-4">
               <SearchInput

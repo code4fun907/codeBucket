@@ -2,9 +2,9 @@ import NavBar from "../NavBar";
 
 const Layout = ({ children }) => (
   <div className="bg-gray-100">
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col min-h-screen">
       <NavBar />
-      <div className="self-center w-full mt-4 max-w-7xl">{children}</div>
+      <div className="mt-4 max-w-7xl self-center w-full px-4">{children}</div>
     </div>
   </div>
 );
