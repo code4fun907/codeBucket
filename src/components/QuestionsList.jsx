@@ -15,7 +15,7 @@ const QuestionsList = ({ questions }) => {
 
   return (
     <div
-      className="flex-grow w-1/2 overflow-scroll"
+      className="flex-grow w-1/2 overflow-scroll scrollbar-none"
       style={{ height: questionsListHeight }}
     >
       {questions.map((question) => (

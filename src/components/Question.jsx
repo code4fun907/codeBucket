@@ -4,7 +4,7 @@ import HeartIcon from "../icons/HeartIcon";
 import CommentIcon from "../icons/CommentIcon";
 
 const Question = ({ title, contentPreview }) => (
-  <Card className="p-4 break-words">
+  <Card className="p-4 break-words bg-white">
     <h1 className="mb-4 text-lg text-blue-600">{title}</h1>
     <p className="text-gray-500">{contentPreview}</p>
     <div className="flex mt-4 gap-4">

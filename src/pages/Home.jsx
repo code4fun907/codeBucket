@@ -108,7 +108,7 @@ const Home = () => {
   return (
     <div className="flex">
       <QuestionsList questions={questions} />
-      <Card className="hidden w-1/3 h-full p-4 ml-8 md:block">
+      <Card className="hidden w-1/3 h-full p-4 ml-8 bg-white md:block">
         Side Controlls
       </Card>
     </div>
