@@ -5,7 +5,19 @@ import CommentIcon from "../icons/CommentIcon";
 import { useSearch } from "../contexts/Search";
 
 const Question = ({ title, contentPreview, tags, likes, comments }) => {
-  const { setFilterTags } = useSearch();
+  const { setFilterTags, filterTags } = useSearch();
+
+  const handleAddFilterTag = (tag) => {
+    if (filterTags.includes(tag)) {
+      // remove tag is user clicks on it and its already being filterd
+      setFilterTags((prev) =>
+        filterTags.filter((tag) => !filterTags.includes(tag))
+      );
+      return;
+    } else {
+      setFilterTags((prev) => [...prev, tag]);
+    }
+  };
 
   return (
     <Card className="p-4 break-words bg-white">
@@ -29,7 +41,7 @@ const Question = ({ title, contentPreview, tags, likes, comments }) => {
         <div className="flex items-start gap-4">
           {tags.map((tag, index) => (
             <Card
-              onClick={() => setFilterTags((prev) => [...prev, tag])}
+              onClick={() => handleAddFilterTag(tag)}
               key={index}
               className="p-1 cursor-pointer"
             >
