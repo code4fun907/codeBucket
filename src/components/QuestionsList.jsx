@@ -14,12 +14,15 @@ const QuestionsList = ({ questions }) => {
     setQuestionsListHeight(`calc((100vh - ${navBarHeight}) - 1rem)`);
   }, []);
 
+  // TODO: figure out a way to make this less ugly
   const formatQuestion = (question) => {
     if (question.item) {
       return {
         title: question.item.title,
         contentPreview: question.item.contentPreview,
         tags: question.item.tags,
+        likes: question.item.likes,
+        comments: question.item.comments,
       };
     }
 
@@ -27,6 +30,8 @@ const QuestionsList = ({ questions }) => {
       title: question.title,
       contentPreview: question.contentPreview,
       tags: question.tags,
+      likes: question.likes,
+      comments: question.comments,
     };
   };
 
@@ -42,6 +47,8 @@ const QuestionsList = ({ questions }) => {
               title={formatQuestion(question).title}
               contentPreview={formatQuestion(question).contentPreview}
               tags={formatQuestion(question).tags}
+              likes={formatQuestion(question).likes}
+              comments={formatQuestion(question).comments}
             />
           </div>
         ))

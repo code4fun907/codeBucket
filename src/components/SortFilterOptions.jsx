@@ -21,8 +21,7 @@ const RadioItem = ({ value, text, ...props }) => (
 );
 
 const SortFilterOptions = () => {
-  const [selected, setSelected] = useState("recent");
-  const { filterTags, setFilterTags } = useSearch();
+  const { filterTags, setFilterTags, filterBy, setFilterBy } = useSearch();
   const { addToast } = useToasts();
 
   const handleAddFilterTag = () => {
@@ -34,7 +33,7 @@ const SortFilterOptions = () => {
       return;
     }
 
-    setFilterTags((prev) => [...prev, "angular"]);
+    setFilterTags((prev) => [...prev, "css"]);
   };
 
   const handleDeleteFilterTag = (index) => {
@@ -44,10 +43,11 @@ const SortFilterOptions = () => {
   return (
     <Card className="hidden w-1/3 h-full p-4 ml-8 bg-white md:block">
       <h1 className="text-xl text-blue-600">Sort question by</h1>
-      <RadioGroup value={selected} onChange={setSelected} className="mt-4">
+      <RadioGroup value={filterBy} onChange={setFilterBy} className="mt-4">
         <RadioItem value="recent" text="most recent" />
         <RadioItem value="likes" text="most popular (likes)" />
         <RadioItem value="comments" text="most popular (comments)" />
+        <RadioItem value="none" text="none" />
       </RadioGroup>
       <h1 className="text-xl text-blue-600">Filter questions by</h1>
       <AddList

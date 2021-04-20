@@ -7,18 +7,25 @@ export const SearchContext = createContext();
 export const useSearch = () => useContext(SearchContext);
 
 const filterQuestions = (questions, tags, by) => {
-  if (tags.length <= 0) return questions;
+  if (!by && tags.length === 0) return questions;
 
   let newQuestions = [];
-  console.log(questions, ": filter 1");
+  let copyOfQuestions = [...questions];
 
-  for (const question of questions) {
+  switch (by) {
+    case "likes":
+      copyOfQuestions.sort((a, b) => b.likes - a.likes);
+      break;
+  }
+
+  if (tags.length === 0) return copyOfQuestions;
+
+  for (const question of copyOfQuestions) {
     question.tags.forEach((tag) => {
       if (tags.includes(tag)) newQuestions.push(question);
     });
   }
 
-  console.log(newQuestions, ": filter 2");
   return newQuestions;
 };
 
@@ -27,7 +34,7 @@ export const SearchContextProvider = ({ children }) => {
   const [filteredQuestions, setFilterdQuestions] = useState([]);
   const [questionsQuery, setQuestionsQuery] = useState("");
   const [filterTags, setFilterTags] = useState([]);
-  const [filterBy, setFilterBy] = useState("");
+  const [filterBy, setFilterBy] = useState("none");
 
   useEffect(() => {
     const options = {
@@ -47,8 +54,6 @@ export const SearchContextProvider = ({ children }) => {
       filterQuestions(prevQuestions, filterTags, filterBy)
     );
   }, [questionsQuery, questions, filterTags, filterBy]);
-
-  console.log(filterTags);
 
   const values = {
     filteredQuestions,
