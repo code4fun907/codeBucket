@@ -1,5 +1,7 @@
 import Card from "./ui/Card";
 import AddList from "./ui/AddList";
+import { useSearch } from "../contexts/Search";
+import { useToasts } from "react-toast-notifications";
 import { RadioGroup } from "@headlessui/react";
 import { useState } from "react";
 
@@ -20,6 +22,24 @@ const RadioItem = ({ value, text, ...props }) => (
 
 const SortFilterOptions = () => {
   const [selected, setSelected] = useState("recent");
+  const { filterTags, setFilterTags } = useSearch();
+  const { addToast } = useToasts();
+
+  const handleAddFilterTag = () => {
+    if (filterTags.length === 5) {
+      addToast("Cant add more then 5 tags!", {
+        appearance: "error",
+        autoDismiss: true,
+      });
+      return;
+    }
+
+    setFilterTags((prev) => [...prev, "angular"]);
+  };
+
+  const handleDeleteFilterTag = (index) => {
+    setFilterTags((prev) => prev.filter((_, i) => i != index));
+  };
 
   return (
     <Card className="hidden w-1/3 h-full p-4 ml-8 bg-white md:block">
@@ -30,7 +50,13 @@ const SortFilterOptions = () => {
         <RadioItem value="comments" text="most popular (comments)" />
       </RadioGroup>
       <h1 className="text-xl text-blue-600">Filter questions by</h1>
-      <AddList name="Tags" className="mt-4" max={5} />
+      <AddList
+        name="Tags"
+        className="mt-4"
+        items={filterTags}
+        onAdd={handleAddFilterTag}
+        onDelete={handleDeleteFilterTag}
+      />
     </Card>
   );
 };

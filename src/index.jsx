@@ -8,14 +8,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ToastProvider>
-      <QuestionsContextProvider>
-        <SearchContextProvider>
-          <App />
-        </SearchContextProvider>
-      </QuestionsContextProvider>
-    </ToastProvider>
-  </React.StrictMode>,
+  <ToastProvider placement="bottom-center">
+    <QuestionsContextProvider>
+      <SearchContextProvider>
+        <App />
+      </SearchContextProvider>
+    </QuestionsContextProvider>
+  </ToastProvider>,
   document.getElementById("root")
 );

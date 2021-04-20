@@ -19,10 +19,15 @@ const QuestionsList = ({ questions }) => {
       return {
         title: question.item.title,
         contentPreview: question.item.contentPreview,
+        tags: question.item.tags,
       };
     }
 
-    return { title: question.title, contentPreview: question.contentPreview };
+    return {
+      title: question.title,
+      contentPreview: question.contentPreview,
+      tags: question.tags,
+    };
   };
 
   return (
@@ -30,14 +35,19 @@ const QuestionsList = ({ questions }) => {
       className="flex-grow w-1/2 overflow-scroll scrollbar-none"
       style={{ height: questionsListHeight }}
     >
-      {questions.map((question) => (
-        <div key={uuid()} className="mb-4">
-          <Question
-            title={formatQuestion(question).title}
-            contentPreview={formatQuestion(question).contentPreview}
-          />
-        </div>
-      ))}
+      {questions.length > 0 ? (
+        questions.map((question) => (
+          <div key={uuid()} className="mb-4">
+            <Question
+              title={formatQuestion(question).title}
+              contentPreview={formatQuestion(question).contentPreview}
+              tags={formatQuestion(question).tags}
+            />
+          </div>
+        ))
+      ) : (
+        <p className="text-center">No Question Matched Your Criteria...</p>
+      )}
     </div>
   );
 };
