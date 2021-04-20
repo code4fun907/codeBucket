@@ -39,7 +39,7 @@ const AddList = ({ name, max, className = "" }) => {
           things.map((thing, index) => (
             <div
               key={index}
-              className="pl-2 text-gray-500 border-l-4 border-blue-500 cursor-pointer hover:border-red-500 hover:ml-2 transition-all"
+              className="pl-2 text-gray-500 border-l-4 border-blue-500 cursor-pointer hover:border-red-500 transition-all hover:border-l-8"
               onClick={() => handleDeleteItem(index)}
             >
               {thing}
