@@ -1,11 +1,14 @@
 import App from "./components/App";
 import { QuestionsContextProvider } from "./contexts/Questions";
 import { SearchContextProvider } from "./contexts/Search";
+import Modal from "react-modal";
 import { ToastProvider } from "react-toast-notifications";
 import * as React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
+
+Modal.setAppElement("#root");
 
 ReactDOM.render(
   <ToastProvider placement="bottom-center">

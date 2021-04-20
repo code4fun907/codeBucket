@@ -24,7 +24,8 @@ const SortFilterOptions = () => {
   const { filterTags, setFilterTags, filterBy, setFilterBy } = useSearch();
   const { addToast } = useToasts();
 
-  const handleAddFilterTag = () => {
+  const handleAddFilterTag = (tag) => {
+    // TODO: make sure user cant add multiple of the same tag
     if (filterTags.length === 5) {
       addToast("Cant add more then 5 tags!", {
         appearance: "error",
@@ -33,7 +34,7 @@ const SortFilterOptions = () => {
       return;
     }
 
-    setFilterTags((prev) => [...prev, "css"]);
+    setFilterTags((prev) => [...prev, tag]);
   };
 
   const handleDeleteFilterTag = (index) => {

@@ -16,6 +16,10 @@ const filterQuestions = (questions, tags, by) => {
     case "likes":
       copyOfQuestions.sort((a, b) => b.likes - a.likes);
       break;
+
+    case "comments":
+      copyOfQuestions.sort((a, b) => b.comments - a.comments);
+      break;
   }
 
   if (tags.length === 0) return copyOfQuestions;
@@ -49,7 +53,6 @@ export const SearchContextProvider = ({ children }) => {
     } else {
       setFilterdQuestions(questions);
     }
-
     setFilterdQuestions((prevQuestions) =>
       filterQuestions(prevQuestions, filterTags, filterBy)
     );
