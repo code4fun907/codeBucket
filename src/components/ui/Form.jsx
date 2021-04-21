@@ -9,7 +9,11 @@ const Form = ({ children, ...props }) => {
 const SubmitButton = ({ children, disabled = false, ...props }) => {
   return (
     <button
-      className="w-full p-4 text-white bg-blue-400 rounded shadow-md hover:bg-blue-300 transition-all"
+      className={`w-full p-4 text-white rounded shadow-md hover:bg-blue-300 transition-all ${
+        disabled
+          ? "bg-blue-200 cursor-not-allowed"
+          : "cursor-pointer bg-blue-400"
+      }`}
       type="submit"
       disabled={disabled}
       {...props}
