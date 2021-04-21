@@ -1,6 +1,6 @@
-import { Fragment } from "react";
+import { Fragment, forwardRef } from "react";
 
-const Input = ({ type, text, ...props }) => {
+const Input = forwardRef(({ type, text, ...props }, ref) => {
   return (
     <Fragment>
       <label className="text-gray-600">{text}</label>
@@ -9,13 +9,18 @@ const Input = ({ type, text, ...props }) => {
         type={type}
         placeholder={text.toLowerCase()}
         {...props}
+        ref={ref}
       />
     </Fragment>
   );
-};
+});
 
-const Info = ({ children }) => {
-  return <p className="mt-1 text-xs text-gray-400">{children}</p>;
+const Info = ({ children, ...props }) => {
+  return (
+    <p className="mt-1 text-xs text-gray-400" {...props}>
+      {children}
+    </p>
+  );
 };
 
 Input.Info = Info;
