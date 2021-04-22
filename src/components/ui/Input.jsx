@@ -15,14 +15,4 @@ const Input = forwardRef(({ type, text, ...props }, ref) => {
   );
 });
 
-const Info = ({ children, ...props }) => {
-  return (
-    <p className="mt-1 text-xs text-gray-400" {...props}>
-      {children}
-    </p>
-  );
-};
-
-Input.Info = Info;
-
 export default Input;

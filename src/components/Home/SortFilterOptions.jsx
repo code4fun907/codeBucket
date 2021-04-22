@@ -1,6 +1,6 @@
-import Card from "./ui/Card";
-import AddList from "./ui/AddList";
-import { useSearch } from "../contexts/Search";
+import Card from "../ui/Card";
+import AddList from "../ui/AddList";
+import { useSearch } from "../../contexts/Search";
 import { useToasts } from "react-toast-notifications";
 import { RadioGroup } from "@headlessui/react";
 

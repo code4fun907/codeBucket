@@ -1,8 +1,8 @@
-import Card from "./ui/Card";
-import InfoIcon from "./ui/InfoIcon";
-import HeartIcon from "../icons/HeartIcon";
-import CommentIcon from "../icons/CommentIcon";
-import { useSearch } from "../contexts/Search";
+import Card from "../ui/Card";
+import InfoIcon from "../ui/InfoIcon";
+import HeartIcon from "../../icons/HeartIcon";
+import CommentIcon from "../../icons/CommentIcon";
+import { useSearch } from "../../contexts/Search";
 
 const Question = ({ title, contentPreview, tags, likes, comments }) => {
   const { setFilterTags, filterTags } = useSearch();

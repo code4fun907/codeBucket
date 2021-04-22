@@ -1,5 +1,5 @@
-import QuestionsList from "../components/QuestionsList";
-import SortFilterOptions from "../components/SortFilterOptions";
+import QuestionsList from "../components/Home/QuestionsList";
+import SortFilterOptions from "../components/Home/SortFilterOptions";
 import { useSearch } from "../contexts/Search";
 
 const Home = () => {

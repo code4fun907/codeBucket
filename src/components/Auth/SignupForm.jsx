@@ -4,6 +4,7 @@ import OAuthButton from "./OAuthButton";
 import AuthLayout from "./AuthLayout";
 import Form from "../ui/Form";
 import Input from "../ui/Input";
+import TextInfo from "../ui/TextInfo";
 import { useAuth } from "../../contexts/Auth";
 import { signupSchema } from "../../utils/validation";
 import { useForm } from "react-hook-form";
@@ -62,7 +63,7 @@ const SignupForm = () => {
         </div>
         <div className="flex flex-col">
           <Input type="password" text="Password" {...register("password")} />
-          <Input.Info>password must be at least 8 long</Input.Info>
+          <TextInfo>password must be at least 8 long</TextInfo>
         </div>
         <div className="flex flex-col">
           <Input
