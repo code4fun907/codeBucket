@@ -13,11 +13,13 @@ const DashboardLayout = ({ children }) => {
 };
 
 const LeftSection = ({ children }) => (
-  <div className="flex flex-col w-1/3">{children}</div>
+  <div className="flex flex-col w-full md:w-1/3 hidden md:block">
+    {children}
+  </div>
 );
 
 const RightSection = ({ children }) => (
-  <div className="flex flex-col w-2/3 overflow-scroll scrollbar-none">
+  <div className="flex flex-col w-full overflow-scroll md:w-2/3 scrollbar-none">
     {children}
   </div>
 );

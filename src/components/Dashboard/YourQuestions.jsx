@@ -8,7 +8,7 @@ const YourQuestions = () => {
   const { questions } = useQuestions();
 
   return (
-    <>
+    <div className="mt-2">
       <h1 className="text-xl">Your questions</h1>
       <TextInfo className="mb-4">veiw or edit your previous questions</TextInfo>
       <Card className="h-screen p-2 bg-white overflow-scroll scrollbar-none">
@@ -21,7 +21,7 @@ const YourQuestions = () => {
           </div>
         ))}
       </Card>
-    </>
+    </div>
   );
 };
 
