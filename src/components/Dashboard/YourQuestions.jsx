@@ -5,16 +5,15 @@ import uuid from "react-uuid";
 import { useQuestions } from "../../contexts/Questions";
 
 const YourQuestions = () => {
-  const questions = [];
+  const { questions } = useQuestions();
 
   const renderQuestions = () => {
     if (questions.length === 0)
       return (
-        <div>
-          <p className="text-sm text-gray-400">Ask a question</p>
-          <button className="bg-blue-400 p-2 rounded text-white text-xs mt-2 hover:bg-blue-500 transition-all cursor-pointer">
-            Ask a question
-          </button>
+        <div className="flex justify-center">
+          <p className="text-sm text-gray-400">
+            Ask a question to get started ---->
+          </p>
         </div>
       );
 
