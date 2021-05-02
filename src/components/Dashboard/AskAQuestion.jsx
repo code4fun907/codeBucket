@@ -11,7 +11,7 @@ const AskAQuestion = () => {
   const { currentAskingQuestion, setCurrentAskingQuestion } = useQuestion();
   const [previewShowing, setPreviewShowing] = useState(false);
   const [yourQuestionsShowing, setYourQuestionsShowing] = useState(false);
-  //
+
   // TODO: this is so extremely hacky :facepalm
   // basically I need to make sure if the user is on the 'your questions' tab
   // on a small screen then expand to a large screen it switches back to showing
@@ -53,6 +53,25 @@ const AskAQuestion = () => {
     </div>
   );
 
+  const renderPreviewOrEditor = () =>
+    previewShowing ? (
+      <Card className="w-full h-full p-2 overflow-scroll bg-white rounded">
+        <ReactMarkdown className="markdown">
+          {currentAskingQuestion}
+        </ReactMarkdown>
+      </Card>
+    ) : (
+      <Card className="h-full">
+        <textarea
+          placeholder="type some markdown and it will be put into the preview"
+          resize="none"
+          className="w-full h-full p-2 rounded resize-none"
+          onChange={(e) => setCurrentAskingQuestion(e.target.value)}
+          value={currentAskingQuestion}
+        />
+      </Card>
+    );
+
   return (
     <>
       {renderTabButtons()}
@@ -74,24 +93,7 @@ const AskAQuestion = () => {
           >
             toggle preview
           </button>
-
-          {previewShowing ? (
-            <Card className="w-full h-full p-2 overflow-scroll bg-white rounded">
-              <ReactMarkdown className="markdown">
-                {currentAskingQuestion}
-              </ReactMarkdown>
-            </Card>
-          ) : (
-            <Card className="h-full">
-              <textarea
-                placeholder="type some markdown and it will be put into the preview"
-                resize="none"
-                className="w-full h-full p-2 rounded resize-none"
-                onChange={(e) => setCurrentAskingQuestion(e.target.value)}
-                value={currentAskingQuestion}
-              />
-            </Card>
-          )}
+          {renderPreviewOrEditor()}
         </>
       ) : (
         <YourQuestions />
