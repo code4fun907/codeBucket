@@ -13,6 +13,42 @@ const NavBar = () => {
   const location = useLocation();
   const { user, signout } = useAuth();
 
+  const searchContainerClassNames = () =>
+    `mb-4 ${location.pathname != "/" ? "hidden" : "block"}`;
+
+  const signoutButtonClassNames = () =>
+    `p-2 rounded text-white hover:bg-blue-500 mb-2 ${
+      !user ? "hidden" : "block"
+    }`;
+
+  const renderDesktopLinks = () => (
+    <ul className="hidden text-white gap-8 md:flex">
+      <NavLink to="/auth/signin" text="Sign in" show={!user} />
+      <NavLink to="/auth/signup" text="Sign up" show={!user} />
+      <button onClick={signout} className={signoutButtonClassNames}>
+        Sign out
+      </button>
+    </ul>
+  );
+
+  const renderMobileLinks = () => (
+    <ul className="text-white">
+      <div className={searchContainerClassNames}>
+        <SearchInput
+          f="questions"
+          value={questionsQuery}
+          onChange={handleChange}
+          className="w-full p-4 text-sm"
+        />
+      </div>
+      <NavLink to="/auth/signin" text="Sign in" className="mb-4" show={!user} />
+      <NavLink to="/auth/signup" text="Sign up" className="mb-4" show={!user} />
+      <button onClick={signout} className={signoutButtonClassNames}>
+        Sign out
+      </button>
+    </ul>
+  );
+
   const handleChange = (e) => {
     setQuestionsQuery(e.target.value);
   };
@@ -26,21 +62,8 @@ const NavBar = () => {
         <Link to="/" className="mr-auto">
           <LogoIcon />
         </Link>
-        <ul className="hidden text-white gap-8 md:flex">
-          <NavLink to="/auth/signin" text="Sign in" show={!user} />
-          <NavLink to="/auth/signup" text="Sign up" show={!user} />
-          <button
-            onClick={signout}
-            className={`p-2 rounded text-white hover:bg-blue-500 ${
-              !user ? "hidden" : "block"
-            }`}
-          >
-            Sign out
-          </button>
-        </ul>
-        <div
-          className={`ml-8 ${location.pathname != "/" ? "hidden" : "block"}`}
-        >
+        {renderDesktopLinks()}
+        <div className={searchContainerClassNames}>
           <SearchInput
             f="questions"
             value={questionsQuery}
@@ -56,40 +79,7 @@ const NavBar = () => {
       </nav>
       {mobileNavOpen && (
         <div className="w-full px-4 bg-blue-400 md:hidden">
-          <ul className="text-white">
-            <div
-              className={`mb-4 ${
-                location.pathname != "/" ? "hidden" : "block"
-              }`}
-            >
-              <SearchInput
-                f="questions"
-                value={questionsQuery}
-                onChange={handleChange}
-                className="w-full p-4 text-sm"
-              />
-            </div>
-            <NavLink
-              to="/auth/signin"
-              text="Sign in"
-              className="mb-4"
-              show={!user}
-            />
-            <NavLink
-              to="/auth/signup"
-              text="Sign up"
-              className="mb-4"
-              show={!user}
-            />
-            <button
-              onClick={signout}
-              className={`p-2 rounded text-white hover:bg-blue-500 mb-2 ${
-                !user ? "hidden" : "block"
-              }`}
-            >
-              Sign out
-            </button>
-          </ul>
+          {renderMobileLinks()}
         </div>
       )}
     </header>
