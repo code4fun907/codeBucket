@@ -24,14 +24,23 @@ const SortFilterOptions = () => {
   const { addToast } = useToasts();
 
   const handleAddFilterTag = (tag) => {
-    // TODO: make sure user cant add multiple of the same tag
-    if (filterTags.length === 5) {
-      addToast("Cant add more then 5 tags!", {
+    if (tag === "")
+      return addToast("Cant add a empty tag", {
         appearance: "error",
         autoDismiss: true,
       });
-      return;
-    }
+
+    if (filterTags.length === 5)
+      return addToast("Cant add more then 5 tags!", {
+        appearance: "error",
+        autoDismiss: true,
+      });
+
+    if (filterTags.includes(tag))
+      return addToast(`You already have a ${tag} tag`, {
+        appearance: "error",
+        autoDismiss: true,
+      });
 
     setFilterTags((prev) => [...prev, tag]);
   };
