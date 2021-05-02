@@ -76,7 +76,7 @@ const AskAQuestion = () => {
           </button>
 
           {previewShowing ? (
-            <Card className="w-full h-full p-2 overflow-scroll bg-white rounded scrollbar-none">
+            <Card className="w-full h-full p-2 overflow-scroll bg-white rounded">
               <ReactMarkdown className="markdown">
                 {currentAskingQuestion}
               </ReactMarkdown>
@@ -86,7 +86,7 @@ const AskAQuestion = () => {
               <textarea
                 placeholder="type some markdown and it will be put into the preview"
                 resize="none"
-                className="w-full h-full p-2 rounded resize-none scrollbar-none"
+                className="w-full h-full p-2 rounded resize-none"
                 onChange={(e) => setCurrentAskingQuestion(e.target.value)}
                 value={currentAskingQuestion}
               />

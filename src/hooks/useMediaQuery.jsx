@@ -7,11 +7,11 @@ const useMediaQuery = (mediaQuery) => {
     const mediaQueryList = window.matchMedia(mediaQuery);
     const documentChangeHandler = () => setMatch(!!mediaQueryList.matches);
 
-    mediaQueryList.addListener(documentChangeHandler);
+    mediaQueryList.addEventListener(documentChangeHandler);
 
     documentChangeHandler();
     return () => {
-      mediaQueryList.removeListener(documentChangeHandler);
+      mediaQueryList.removeEventListener(documentChangeHandler);
     };
   }, [mediaQuery]);
 
