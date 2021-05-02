@@ -9,6 +9,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 const App = () => {
   const { user } = useAuth();
+  console.log(user);
 
   return (
     <BrowserRouter>
@@ -23,9 +24,12 @@ const App = () => {
           <Route exact path="/auth/signin">
             <SigninForm />
           </Route>
-          <ProtectedRoute exact path="/dashboard" auth={user}>
-            <DashBoard />
-          </ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/dashboard"
+            component={DashBoard}
+            auth={user !== null}
+          />
         </Switch>
       </Layout>
     </BrowserRouter>

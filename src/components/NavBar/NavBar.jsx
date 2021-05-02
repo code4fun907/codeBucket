@@ -13,19 +13,20 @@ const NavBar = () => {
   const location = useLocation();
   const { user, signout } = useAuth();
 
-  const searchContainerClassNames = () =>
-    `mb-4 ${location.pathname != "/" ? "hidden" : "block"}`;
+  const searchContainerClassNames = (classNames = "") =>
+    `${classNames} ${location.pathname !== "/" ? "hidden" : "block"}`;
 
-  const signoutButtonClassNames = () =>
-    `p-2 rounded text-white hover:bg-blue-500 mb-2 ${
+  const signoutButtonClassNames = (classNames = "") =>
+    `p-2 rounded text-white hover:bg-blue-300 ${classNames} ${
       !user ? "hidden" : "block"
     }`;
 
   const renderDesktopLinks = () => (
-    <ul className="hidden text-white gap-8 md:flex">
+    <ul className="hidden mr-8 text-white gap-8 md:flex">
       <NavLink to="/auth/signin" text="Sign in" show={!user} />
       <NavLink to="/auth/signup" text="Sign up" show={!user} />
-      <button onClick={signout} className={signoutButtonClassNames}>
+      <NavLink to="/Dashboard" text="Dashboard" show={user} />
+      <button onClick={signout} className={signoutButtonClassNames()}>
         Sign out
       </button>
     </ul>
@@ -33,7 +34,7 @@ const NavBar = () => {
 
   const renderMobileLinks = () => (
     <ul className="text-white">
-      <div className={searchContainerClassNames}>
+      <div className={searchContainerClassNames("mb-4")}>
         <SearchInput
           f="questions"
           value={questionsQuery}
@@ -43,7 +44,8 @@ const NavBar = () => {
       </div>
       <NavLink to="/auth/signin" text="Sign in" className="mb-4" show={!user} />
       <NavLink to="/auth/signup" text="Sign up" className="mb-4" show={!user} />
-      <button onClick={signout} className={signoutButtonClassNames}>
+      <NavLink to="/Dashboard" text="Dashboard" show={user} />
+      <button onClick={signout} className={signoutButtonClassNames("mb-2")}>
         Sign out
       </button>
     </ul>
@@ -63,7 +65,7 @@ const NavBar = () => {
           <LogoIcon />
         </Link>
         {renderDesktopLinks()}
-        <div className={searchContainerClassNames}>
+        <div className={searchContainerClassNames()}>
           <SearchInput
             f="questions"
             value={questionsQuery}

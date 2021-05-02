@@ -1,7 +1,6 @@
 import Question from "./Question";
 import uuid from "react-uuid";
 import useHeight from "../../hooks/useHeight";
-import { useState, useEffect } from "react";
 
 const QuestionsList = ({ questions }) => {
   const questionsListHeight = useHeight();
