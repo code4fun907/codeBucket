@@ -1,9 +1,10 @@
-import clsx from "clsx";
 import { Link } from "react-router-dom";
 
-const NavLink = ({ to, className = "", linkClassName = "", text }) => (
+const NavLink = ({ to, className = "", linkClassName = "", text, show }) => (
   <li
-    className={clsx("hover:bg-blue-300 p-2 rounded cursor-pointer", className)}
+    className={`hover:bg-blue-300 p-2 rounded cursor-pointer ${className} ${
+      !show ? "hidden" : "block"
+    }`}
   >
     <Link className={linkClassName} to={to}>
       {text}

@@ -3,14 +3,14 @@ import SearchInput from "../ui/SearchInput";
 import LogoIcon from "../../icons/LogoIcon";
 import Hamburger from "../../icons/Hamburger";
 import { useSearch } from "../../contexts/Search";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../contexts/Auth";
 
 const NavBar = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { questionsQuery, setQuestionsQuery } = useSearch();
-
+  const location = useLocation();
   const { user, signout } = useAuth();
 
   const handleChange = (e) => {
@@ -27,21 +27,20 @@ const NavBar = () => {
           <LogoIcon />
         </Link>
         <ul className="hidden text-white gap-8 md:flex">
-          {user ? (
-            <>
-              <p className="text-white">Signed in</p>
-              <button onClick={() => signout()} className="bg-blue-500 p-2">
-                sign out
-              </button>
-            </>
-          ) : (
-            <>
-              <NavLink to="/auth/signin" text="Sign in" />
-              <NavLink to="/auth/signup" text="Sign up" />
-            </>
-          )}
+          <NavLink to="/auth/signin" text="Sign in" show={!user} />
+          <NavLink to="/auth/signup" text="Sign up" show={!user} />
+          <button
+            onClick={signout}
+            className={`p-2 rounded text-white hover:bg-blue-500 ${
+              !user ? "hidden" : "block"
+            }`}
+          >
+            Sign out
+          </button>
         </ul>
-        <div className="ml-8">
+        <div
+          className={`ml-8 ${location.pathname != "/" ? "hidden" : "block"}`}
+        >
           <SearchInput
             f="questions"
             value={questionsQuery}
@@ -58,7 +57,11 @@ const NavBar = () => {
       {mobileNavOpen && (
         <div className="w-full px-4 bg-blue-400 md:hidden">
           <ul className="text-white">
-            <div className="mb-4">
+            <div
+              className={`mb-4 ${
+                location.pathname != "/" ? "hidden" : "block"
+              }`}
+            >
               <SearchInput
                 f="questions"
                 value={questionsQuery}
@@ -66,8 +69,26 @@ const NavBar = () => {
                 className="w-full p-4 text-sm"
               />
             </div>
-            <NavLink to="/auth/signin" text="Sign in" className="mb-4" />
-            <NavLink to="/auth/signup" text="Sign up" className="mb-4" />
+            <NavLink
+              to="/auth/signin"
+              text="Sign in"
+              className="mb-4"
+              show={!user}
+            />
+            <NavLink
+              to="/auth/signup"
+              text="Sign up"
+              className="mb-4"
+              show={!user}
+            />
+            <button
+              onClick={signout}
+              className={`p-2 rounded text-white hover:bg-blue-500 mb-2 ${
+                !user ? "hidden" : "block"
+              }`}
+            >
+              Sign out
+            </button>
           </ul>
         </div>
       )}
