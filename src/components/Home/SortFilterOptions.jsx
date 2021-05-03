@@ -1,5 +1,5 @@
 import Card from "../ui/Card";
-import AddList from "../ui/AddList";
+import VerticalAddList from "../ui/VerticalAddList";
 import { useSearch } from "../../contexts/Search";
 import { useToasts } from "react-toast-notifications";
 import { RadioGroup } from "@headlessui/react";
@@ -59,7 +59,7 @@ const SortFilterOptions = () => {
         <RadioItem value="none" text="none" />
       </RadioGroup>
       <h1 className="text-xl text-blue-600">Filter questions by</h1>
-      <AddList
+      <VerticalAddList
         name="Tags"
         className="mt-4"
         items={filterTags}

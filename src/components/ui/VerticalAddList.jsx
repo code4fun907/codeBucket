@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MiddleModal from "./MiddleModal";
 import Card from "./Card";
+import TextInfo from "./TextInfo";
 
 const AddList = ({ name, items = [], onAdd, onDelete }) => {
   const [addModalOpen, setAddModalOpen] = useState(false);
@@ -46,15 +47,11 @@ const AddList = ({ name, items = [], onAdd, onDelete }) => {
             </div>
           ))
         ) : (
-          <p className="pl-2 text-sm text-gray-500">
-            Add a new {formattedName}
-          </p>
+          <TextInfo className="pl-2">Add a new {formattedName}</TextInfo>
         )}
       </div>
       {items.length > 0 && (
-        <p className="mt-2 text-xs text-gray-500">
-          tip: click a item again to remove it
-        </p>
+        <TextInfo>tip: click a item again to remove it</TextInfo>
       )}
       <MiddleModal isOpen={addModalOpen} onClose={handleAddModalClose}>
         <Card className="flex flex-col p-4 bg-white">
