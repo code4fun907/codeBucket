@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 
 const NavLink = ({ to, className = "", linkClassName = "", text, show }) => (
-  <li
-    className={`hover:bg-blue-300 p-2 rounded cursor-pointer ${className} ${
-      !show ? "hidden" : "block"
-    }`}
-  >
-    <Link className={linkClassName} to={to}>
+  <Link className={linkClassName} to={to}>
+    <li
+      className={`hover:bg-blue-300 p-2 rounded cursor-pointer ${className} ${
+        !show ? "hidden" : "block"
+      }`}
+    >
       {text}
-    </Link>
-  </li>
+    </li>
+  </Link>
 );
 
 export default NavLink;

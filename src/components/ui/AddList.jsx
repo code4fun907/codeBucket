@@ -1,9 +1,8 @@
-import clsx from "clsx";
 import { useState } from "react";
 import MiddleModal from "./MiddleModal";
 import Card from "./Card";
 
-const AddList = ({ name, items = [], onAdd, onDelete, className = "" }) => {
+const AddList = ({ name, items = [], onAdd, onDelete }) => {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [newItem, setNewItem] = useState("");
 
@@ -21,10 +20,11 @@ const AddList = ({ name, items = [], onAdd, onDelete, className = "" }) => {
     handleAddModalClose();
   };
 
-  const formatName = (name) => name.slice(0, name.length - 1).toLowerCase();
+  // for example if name was Tags this would format it to 'tag'
+  const formattedName = name.slice(0, name.length - 1).toLowerCase();
 
   return (
-    <div className={clsx(className)}>
+    <div>
       <div className="flex items-center">
         <p>{name}</p>
         <button
@@ -47,7 +47,7 @@ const AddList = ({ name, items = [], onAdd, onDelete, className = "" }) => {
           ))
         ) : (
           <p className="pl-2 text-sm text-gray-500">
-            Add a new {formatName(name)}
+            Add a new {formattedName}
           </p>
         )}
       </div>
@@ -59,11 +59,11 @@ const AddList = ({ name, items = [], onAdd, onDelete, className = "" }) => {
       <MiddleModal isOpen={addModalOpen} onClose={handleAddModalClose}>
         <Card className="flex flex-col p-4 bg-white">
           <p className="mb-4 text-lg text-gray-500">
-            Add a new {formatName(name)}
+            Add a new {formattedName}
           </p>
           <input
             type="text"
-            placeholder={`new ${formatName(name)}`}
+            placeholder={`new ${formattedName}`}
             value={newItem}
             onChange={(e) => setNewItem(e.target.value)}
             className="p-2 mb-2 border rounded boder-gray-200"
@@ -72,7 +72,7 @@ const AddList = ({ name, items = [], onAdd, onDelete, className = "" }) => {
             onClick={handleAddNewItem}
             className="w-full p-2 text-lg text-white bg-blue-400 rounded hover:bg-blue-300 transition-all"
           >
-            add {formatName(name)}
+            add {formattedName}
           </button>
         </Card>
       </MiddleModal>
