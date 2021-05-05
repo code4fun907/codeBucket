@@ -21,37 +21,67 @@ const SigninForm = () => {
   const history = useHistory();
 
   const {
-    signupWithEmailAndPassword,
     signinWithEmailAndPassword,
     signinWithGithub,
     signinWithGoogle,
   } = useAuth();
 
-  const onSubmit = async (data) => {
+  const handleSignInWithEmailAndPassword = async (data) => {
     setIsSubmitting(true);
-    await signinWithEmailAndPassword(data.email, data.password);
-    setIsSubmitting(false);
-    history.push("/");
+    try {
+      await signinWithEmailAndPassword(data.email, data.password);
+      history.push("/");
+    } catch (err) {
+      return alert(err);
+    }
   };
 
-  const onSignInWithGithub = async () => {
+  const handleSignInWithGithub = async () => {
     setIsSubmitting(true);
-    await signinWithGithub();
-    setIsSubmitting(false);
-    history.push("/");
+    try {
+      await signinWithGithub();
+      history.push("/");
+    } catch (err) {
+      return alert(err);
+    }
   };
 
-  const onSignInWithGoogle = async () => {
+  const handleSignInWithGoogle = async () => {
     setIsSubmitting(true);
-    await signinWithGoogle();
+    try {
+      await signinWithGoogle();
+      history.push("/");
+    } catch (err) {
+      return alert(err);
+    }
+  };
+
+  const onSubmit = async (data, kind) => {
+    switch (kind) {
+      case "provider/username-password":
+        handleSignInWithEmailAndPassword(data);
+        break;
+
+      case "provider/google":
+        handleSignInWithGoogle();
+        break;
+
+      case "provider/github":
+        handleSignInWithGithub();
+        break;
+    }
     setIsSubmitting(false);
-    history.push("/");
   };
 
   return (
     <AuthLayout>
       <h1 className="my-8 text-2xl text-center">Signin</h1>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form
+        onSubmit={handleSubmit((data) =>
+          onSubmit(data, "provider/username-password")
+        )}
+      >
+        <Form.Errors errors={errors} />
         <div className="flex flex-col">
           <Input type="text" text="Email" {...register("email")} />
         </div>
@@ -63,12 +93,12 @@ const SigninForm = () => {
         <OAuthButton
           icon={<GoogleIcon />}
           text="signin with google"
-          onClick={onSignInWithGoogle}
+          onClick={() => onSubmit({}, "provider/google")}
         />
         <OAuthButton
           icon={<GithubIcon />}
           text="signin with github"
-          onClick={onSignInWithGithub}
+          onClick={() => onSubmit({}, "provider/github")}
         />
       </Form>
     </AuthLayout>
