@@ -18,6 +18,7 @@ const AskAQuestion = () => {
     setCurrentAskingQuestionBody,
     currentAskingQuestionTags,
     setCurrentAskingQuestionTags,
+    askNewQuestion,
   } = useQuestion();
   const { addToast } = useToasts();
   const [previewShowing, setPreviewShowing] = useState(false);
@@ -90,6 +91,10 @@ const AskAQuestion = () => {
     setCurrentAskingQuestionTags((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const handleAskQuestion = () => {
+    askNewQuestion();
+  };
+
   const renderPreviewOrEditor = () =>
     previewShowing ? (
       <Card className="w-full h-full p-2 overflow-scroll bg-white rounded">
@@ -142,7 +147,10 @@ const AskAQuestion = () => {
             onAdd={handleAddNewQuestionTag}
             onDelete={handleDeleteNewQuestionTag}
           />
-          <Button className="w-40 my-2 text-md hover:bg-blue-500">
+          <Button
+            className="w-40 my-2 text-md hover:bg-blue-500"
+            onClick={handleAskQuestion}
+          >
             Ask the question
           </Button>
         </>

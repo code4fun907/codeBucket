@@ -1,3 +1,5 @@
+import db from "../../../lib/db";
+import { useAuth } from "../../../contexts/Auth";
 import { useState, createContext, useContext } from "react";
 
 /**
@@ -10,6 +12,8 @@ const QuestionContext = createContext();
 export const useQuestion = () => useContext(QuestionContext);
 
 export const QuestionContextProvider = ({ children }) => {
+  const { user } = useAuth();
+
   const [currentAskingQuestionTitle, setCurrentAskingQuestionTitle] = useState(
     ""
   );
@@ -22,9 +26,15 @@ export const QuestionContextProvider = ({ children }) => {
     []
   );
 
-  console.log("QustionContext: ", currentAskingQuestionTitle);
-  console.log("QustionContext: ", currentAskingQuestionBody);
-  console.log("QustionContext: ", currentAskingQuestionTags);
+  const askNewQuestion = () => {
+    // TODO: Add validation for this shit
+    db.createQuestion(
+      currentAskingQuestionTitle,
+      currentAskingQuestionBody,
+      currentAskingQuestionTags,
+      user.uid
+    );
+  };
 
   const values = {
     currentAskingQuestionTitle,
@@ -33,6 +43,7 @@ export const QuestionContextProvider = ({ children }) => {
     setCurrentAskingQuestionBody,
     currentAskingQuestionTags,
     setCurrentAskingQuestionTags,
+    askNewQuestion,
   };
 
   return (

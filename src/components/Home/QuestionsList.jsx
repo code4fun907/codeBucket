@@ -5,26 +5,8 @@ import useHeight from "../../hooks/useHeight";
 const QuestionsList = ({ questions }) => {
   const questionsListHeight = useHeight();
 
-  // TODO: figure out a way to make this less ugly
-  const formatQuestion = (question) => {
-    if (question.item) {
-      return {
-        title: question.item.title,
-        contentPreview: question.item.contentPreview,
-        tags: question.item.tags,
-        likes: question.item.likes,
-        comments: question.item.comments,
-      };
-    }
-
-    return {
-      title: question.title,
-      contentPreview: question.contentPreview,
-      tags: question.tags,
-      likes: question.likes,
-      comments: question.comments,
-    };
-  };
+  const contentPreview = (question) =>
+    question.body.length < 100 ? question.body : question.body.slice(0, 99);
 
   return (
     <div
@@ -35,16 +17,16 @@ const QuestionsList = ({ questions }) => {
         questions.map((question) => (
           <div key={uuid()} className="mb-4">
             <Question
-              title={formatQuestion(question).title}
-              contentPreview={formatQuestion(question).contentPreview}
-              tags={formatQuestion(question).tags}
-              likes={formatQuestion(question).likes}
-              comments={formatQuestion(question).comments}
+              title={question.title}
+              contentPreview={contentPreview(question)}
+              tags={question.tags}
+              likes={question.likes}
+              comments={question.comments}
             />
           </div>
         ))
       ) : (
-        <p className="text-center">No Question Matched Your Criteria...</p>
+        <p className="text-center text-gray-500">No Questions Found</p>
       )}
     </div>
   );
